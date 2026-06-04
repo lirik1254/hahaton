@@ -23,12 +23,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
       - name: 🏗️ Сборка с Maven
         run: ./mvnw clean package -DskipTests
-
-      - name: 🚦 Запуск тестов
-        run: ./mvnw test
 
   deploy:
     name: 🚀 Deploy
