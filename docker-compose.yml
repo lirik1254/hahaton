@@ -1,5 +1,5 @@
 services:
   app:
-    build: .
+    image: ${APP_IMAGE}
     ports:
       - "8080:8080"
