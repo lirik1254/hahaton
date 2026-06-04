@@ -23,6 +23,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: 🔧 Права на mvnw
+        run: chmod +x ./mvnw
+
       - name: 🏗️ Сборка с Maven
         run: ./mvnw clean package -DskipTests
 
