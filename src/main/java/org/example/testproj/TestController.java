@@ -7,9 +7,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController {
@@ -38,5 +40,14 @@ public class TestController {
     @GetMapping("/test")
     public List<String> testMethod() {
         return List.of("test", "for", "hahaton");
+    }
+
+    @Operation(
+            summary = "Тестовый эндпоинт by ananasini",
+            description = "by ananasini")
+    @ApiResponse(responseCode = "200", description = "Успешный ответ")
+    @PostMapping("/tes2")
+    public Map<String, String> testMethodByAnanasini() {
+        return Map.of("status", "ok", "ananasini", "post");
     }
 }
