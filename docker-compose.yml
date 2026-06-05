@@ -5,3 +5,10 @@ services:
     image: ${APP_IMAGE}
     ports:
       - "8080:8080"
+    networks:
+      - app
+
+# Общая сеть с nginx и фронтом (создаётся командой: docker network create app)
+networks:
+  app:
+    external: true
