@@ -1,5 +1,10 @@
 package org.example.testproj.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.testproj.dto.CreateDeviceRequest;
@@ -18,6 +23,27 @@ public class DeviceController {
 
     private final DeviceService deviceService;
 
+    @Operation(
+            summary = "Список устройств",
+            description = "Возвращает мапу, где ключ — id устройства, а значение — массив [ЖК, здание, название устройства]"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Успешный ответ",
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(type = "object"),
+                    examples = @ExampleObject(
+                            name = "Пример ответа",
+                            value = """
+                                    {
+                                      "id1": ["ЖК1", "Здание 1", "Настенный телевизор1-1"],
+                                      "id2": ["ЖК1", "Здание 2", "Настенный телевизор1-2"],
+                                      "id3": ["ЖК2", "Здание 1", "Настенный телевизор2-1"]
+                                    }"""
+                    )
+            )
+    )
     @GetMapping
     public ResponseEntity<Map<String, List<String>>> getDevices() {
         return ResponseEntity.ok(deviceService.getDevices());
