@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      UJIN_TOKEN: ${UJIN_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
     networks:
       - app
     depends_on:

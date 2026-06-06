@@ -19,3 +19,11 @@ spring:
 server:
   servlet:
     context-path: /api
+
+ujin:
+  base-url: https://hck-api.unicorn.icu
+  token: ${UJIN_TOKEN}
+
+jwt:
+  secret: ${JWT_SECRET}
+  ttl-days: 30
