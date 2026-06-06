@@ -44,13 +44,13 @@ jobs:
       - name: 📥 Checkout репозитория
         uses: actions/checkout@v4
 
-      - name: 📤 Копируем docker-compose.yml на сервер
+      - name: 📤 Копируем docker-compose.yml и init/ на сервер
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "docker-compose.yml"
+          source: "docker-compose.yml,init/init.sql"
           target: "/root/testProj/"
 
       - name: 🚀 Деплой на сервере
