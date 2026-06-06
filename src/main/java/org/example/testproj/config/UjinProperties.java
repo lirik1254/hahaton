@@ -8,4 +8,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class UjinProperties {
     private String baseUrl;
     private String token;
+    private Integer pageSize;
 }

@@ -11,6 +11,6 @@ public class DeviceResponse {
 
     private UUID id;
     private String name;
-    private UUID buildingId;
+    private Integer buildingId;
     private Integer complexId;
 }

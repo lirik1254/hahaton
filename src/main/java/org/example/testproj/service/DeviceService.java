@@ -1,28 +1,52 @@
 package org.example.testproj.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.testproj.client.UjinClient;
+import org.example.testproj.config.UjinProperties;
 import org.example.testproj.dto.CreateDeviceRequest;
 import org.example.testproj.dto.DeviceResponse;
+import org.example.testproj.dto.ujin.UjinBuildingsListResponse;
 import org.example.testproj.entity.Device;
 import org.example.testproj.repository.DeviceRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class DeviceService {
 
     private final DeviceRepository deviceRepository;
+    private final UjinClient ujinClient;
+    private final UjinProperties ujinProperties;
 
     public Map<String, List<String>> getDevices() {
-        Map<String, List<String>> result = new LinkedHashMap<>();
-        result.put("id1", List.of("ЖК1", "Здание 1", "Настенный телевизор1-1"));
-        result.put("id2", List.of("ЖК1", "Здание 2", "Настенный телевизор1-2"));
-        result.put("id3", List.of("ЖК2", "Здание 1", "Настенный телевизор2-1"));
-        return result;
+        List<Device> devices = deviceRepository.findAll();
+        Map<String, List<String>> retMap = new HashMap<>();
+        int page = 1;
+        int pageSize = ujinProperties.getPageSize();
+
+        for (Device device : devices) {
+            List<String> retList = new ArrayList<>(3);
+            UjinBuildingsListResponse buildingsList = ujinClient.getBuildingsList(pageSize, page, device.getComplexId(), null);
+            while (!Objects.equals(buildingsList.getData().getMeta().getLastPage() + 1, buildingsList.getData().getMeta().getCurrentPage())) {
+                buildingsList.getData().getBuildings().forEach(buildingItem -> {
+                    if (buildingItem.getBuilding().getId().equals(device.getBuildingId())) {
+                        retList.add(buildingItem.getComplex().getTitle());
+                        retList.add(buildingItem.getBuilding().getTitle());
+                        retMap.put(device.getId().toString(), retList);
+                    }
+                });
+                if (buildingsList.getData().getMeta().getLastPage().equals(buildingsList.getData().getMeta().getCurrentPage())) {
+                    break;
+                }
+                page = page + 1;
+                buildingsList = ujinClient.getBuildingsList(pageSize, page, device.getComplexId(), null);
+            }
+            retList.add(device.getName());
+        }
+
+        return retMap;
     }
 
     public DeviceResponse createDevice(CreateDeviceRequest request) {
