@@ -40,6 +40,16 @@ public class GroupService {
                 .build();
     }
 
+    public List<GroupResponse> getGroups() {
+        return groupRepository.findAll().stream()
+                .map(g -> GroupResponse.builder()
+                        .id(g.getId())
+                        .name(g.getName())
+                        .deviceIds(g.getDevices().stream().map(d -> d.getId().toString()).toList())
+                        .build())
+                .toList();
+    }
+
     public boolean deleteGroup(UUID id) {
         if (!groupRepository.existsById(id)) {
             return false;

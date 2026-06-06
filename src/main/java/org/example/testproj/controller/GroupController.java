@@ -8,6 +8,7 @@ import org.example.testproj.service.GroupService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,6 +18,11 @@ import java.util.UUID;
 public class GroupController {
 
     private final GroupService groupService;
+
+    @GetMapping
+    public ResponseEntity<List<GroupResponse>> getGroups() {
+        return ResponseEntity.ok(groupService.getGroups());
+    }
 
     @PostMapping
     public ResponseEntity<GroupResponse> createGroup(@Valid @RequestBody CreateGroupRequest request) {
