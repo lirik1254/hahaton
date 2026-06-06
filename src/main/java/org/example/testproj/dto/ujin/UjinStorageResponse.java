@@ -33,6 +33,7 @@ public class UjinStorageResponse {
         private Integer buildingId;
         @JsonProperty("building_title")
         private String buildingTitle;
+        @JsonProperty("storages")
         private List<Room> rooms;
     }
 
