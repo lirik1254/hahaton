@@ -20,8 +20,14 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
+    private String name;
+
     @Column(name = "building_id", nullable = false)
     private UUID buildingId;
+
+    @Column(name = "complex_id", nullable = false)
+    private Integer complexId;
 
     @ManyToMany(mappedBy = "devices")
     private List<Group> groups = new ArrayList<>();

@@ -22,4 +22,20 @@
     </changeSet>
 
 
+    <changeSet id="0004-device-add-complex-id" author="dima">
+        <sqlFile path="init/0004-device-add-complex-id.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
+    <changeSet id="0005-device-add-name" author="dima">
+        <sqlFile path="init/0005-device-add-name.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
 </databaseChangeLog>

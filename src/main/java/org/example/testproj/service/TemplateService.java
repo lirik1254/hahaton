@@ -33,11 +33,17 @@ public class TemplateService {
 
     @Transactional
     public TemplateResponse createTemplate(CreateTemplateRequest request) {
-        List<String> widgetNames = request.getWidgets().stream()
-                .map(org.example.testproj.dto.Widget::getName)
+        List<Widget> widgets = request.getWidgets().stream()
+                .map(dto -> {
+                    Widget widget = new Widget();
+                    widget.setName(dto.getName());
+                    widget.setX(dto.getX());
+                    widget.setY(dto.getY());
+                    widget.setWidth(dto.getWidth());
+                    widget.setHeight(dto.getHeight());
+                    return widgetRepository.save(widget);
+                })
                 .toList();
-
-        List<Widget> widgets = widgetRepository.findAllByNameIn(widgetNames);
 
         Template template = new Template();
         template.setName(request.getName());

@@ -1,11 +1,12 @@
 package org.example.testproj.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.testproj.dto.CreateDeviceRequest;
+import org.example.testproj.dto.DeviceResponse;
 import org.example.testproj.service.DeviceService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,5 +21,10 @@ public class DeviceController {
     @GetMapping
     public ResponseEntity<Map<String, List<String>>> getDevices() {
         return ResponseEntity.ok(deviceService.getDevices());
+    }
+
+    @PostMapping
+    public ResponseEntity<DeviceResponse> createDevice(@Valid @RequestBody CreateDeviceRequest request) {
+        return ResponseEntity.ok(deviceService.createDevice(request));
     }
 }
