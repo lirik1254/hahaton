@@ -16,7 +16,6 @@ public class WidgetService {
     public List<Widget> getWidgets() {
         return widgetRepository.findAll().stream()
                 .map(w -> Widget.builder()
-                        .id(w.getId())
                         .name(w.getName())
                         .x(w.getX())
                         .y(w.getY())

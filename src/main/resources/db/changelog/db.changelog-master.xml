@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0001-init-schema" author="kirill">
+        <sqlFile path="init/init.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
+    <changeSet id="0002-delete-id-from-widget" author="kirill">
+        <sqlFile path="init/delete_id_from_widget.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
+</databaseChangeLog>

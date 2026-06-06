@@ -33,11 +33,11 @@ public class TemplateService {
 
     @Transactional
     public TemplateResponse createTemplate(CreateTemplateRequest request) {
-        List<UUID> widgetIds = request.getWidgets().stream()
-                .map(w -> w.getId())
+        List<String> widgetNames = request.getWidgets().stream()
+                .map(org.example.testproj.dto.Widget::getName)
                 .toList();
 
-        List<Widget> widgets = widgetRepository.findAllByIdIn(widgetIds);
+        List<Widget> widgets = widgetRepository.findAllByNameIn(widgetNames);
 
         Template template = new Template();
         template.setName(request.getName());
@@ -62,7 +62,6 @@ public class TemplateService {
     private TemplateResponse toResponse(Template template) {
         List<org.example.testproj.dto.Widget> widgetDtos = template.getWidgets().stream()
                 .map(w -> org.example.testproj.dto.Widget.builder()
-                        .id(w.getId())
                         .name(w.getName())
                         .x(w.getX())
                         .y(w.getY())

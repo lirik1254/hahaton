@@ -5,7 +5,7 @@ spring:
     url: jdbc:postgresql://db:5432/${POSTGRES_DB}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
-#    url: jdbc:postgresql:/localhost:5432/hahaton
+#    url: jdbc:postgresql://localhost:5432/hahaton
 #    username: postgres
 #    password: postgres
     driver-class-name: org.postgresql.Driver
@@ -13,6 +13,8 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
 
 server:
   servlet:

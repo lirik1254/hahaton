@@ -27,7 +27,7 @@ public class Template {
     @JoinTable(
             name = "widget_templates",
             joinColumns = @JoinColumn(name = "template_id"),
-            inverseJoinColumns = @JoinColumn(name = "widget_id")
+            inverseJoinColumns = @JoinColumn(name = "widget_name", referencedColumnName = "name")
     )
     private List<Widget> widgets = new ArrayList<>();
 }
