@@ -1,0 +1,1 @@
+ALTER TABLE device ADD COLUMN complex_id INTEGER NOT NULL;
