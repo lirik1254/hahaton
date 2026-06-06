@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.testproj.dto.CreateDeviceRequest;
+import org.example.testproj.dto.DeviceAllResponse;
 import org.example.testproj.dto.DeviceResponse;
 import org.example.testproj.service.DeviceService;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +46,7 @@ public class DeviceController {
             )
     )
     @GetMapping
-    public ResponseEntity<Map<String, List<String>>> getDevices() {
+    public ResponseEntity<Map<String, DeviceAllResponse>> getDevices() {
         return ResponseEntity.ok(deviceService.getDevices());
     }
 
