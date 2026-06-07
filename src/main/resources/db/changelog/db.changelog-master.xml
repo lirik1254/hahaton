@@ -46,4 +46,12 @@
                  endDelimiter=";"/>
     </changeSet>
 
+    <changeSet id="0007-create-static-info" author="dima">
+        <sqlFile path="init/0007-create-static-info.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
 </databaseChangeLog>
