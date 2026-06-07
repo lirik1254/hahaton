@@ -1,21 +1,21 @@
 package org.example.testproj.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.testproj.dto.ComplexDevicesResponse;
 import org.example.testproj.dto.CreateDeviceRequest;
-import org.example.testproj.dto.DeviceAllResponse;
 import org.example.testproj.dto.DeviceResponse;
 import org.example.testproj.service.DeviceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/devices")
@@ -26,42 +26,41 @@ public class DeviceController {
 
     @Operation(
             summary = "Список устройств",
-            description = "Возвращает мапу, где ключ — id устройства, а значение — объект с названием ЖК, здания и устройства"
+            description = "Возвращает список ЖК; в каждом ЖК — список строений, в каждом строении — список устройств с шаблоном"
     )
     @ApiResponse(
             responseCode = "200",
             description = "Успешный ответ",
             content = @Content(
                     mediaType = "application/json",
-                    schema = @Schema(type = "object"),
+                    array = @ArraySchema(schema = @Schema(implementation = ComplexDevicesResponse.class)),
                     examples = @ExampleObject(
                             name = "Пример ответа",
                             value = """
-                                    {
-                                      "id1": {
-                                        "complexName": "ЖК1",
-                                        "buildingName": "Здание 1",
-                                        "deviceName": "Настенный телевизор1-1",
-                                        "templateName": "Шаблон 1"
-                                      },
-                                      "id2": {
-                                        "complexName": "ЖК1",
-                                        "buildingName": "Здание 2",
-                                        "deviceName": "Настенный телевизор1-2",
-                                        "templateName": "Шаблон 1"
-                                      },
-                                      "id3": {
-                                        "complexName": "ЖК2",
-                                        "buildingName": "Здание 1",
-                                        "deviceName": "Настенный телевизор2-1",
-                                        "templateName": "Шаблон 2"
+                                    [
+                                      {
+                                        "complexId": "4",
+                                        "complexName": "ЖК 1",
+                                        "buildings": [
+                                          {
+                                            "buildingId": "54",
+                                            "buildingName": "Здание1",
+                                            "devices": [
+                                              {
+                                                "deviceId": "lsdjfljsd",
+                                                "deviceName": "Устройство1",
+                                                "deviceTemplate": "Шаблон 1"
+                                              }
+                                            ]
+                                          }
+                                        ]
                                       }
-                                    }"""
+                                    ]"""
                     )
             )
     )
     @GetMapping
-    public ResponseEntity<Map<String, DeviceAllResponse>> getDevices() {
+    public ResponseEntity<List<ComplexDevicesResponse>> getDevices() {
         return ResponseEntity.ok(deviceService.getDevices());
     }
 
