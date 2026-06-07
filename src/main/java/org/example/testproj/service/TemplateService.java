@@ -11,9 +11,11 @@ import org.example.testproj.repository.WidgetRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +45,7 @@ public class TemplateService {
                     widget.setHeight(dto.getHeight());
                     return widgetRepository.save(widget);
                 })
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
 
         Template template = new Template();
         template.setName(request.getName());
@@ -70,7 +72,7 @@ public class TemplateService {
                         widget.setHeight(dto.getHeight());
                         return widgetRepository.save(widget);
                     })
-                    .toList();
+                    .collect(Collectors.toCollection(ArrayList::new));
 
             template.setName(request.getName());
             template.setWidgets(widgets);
