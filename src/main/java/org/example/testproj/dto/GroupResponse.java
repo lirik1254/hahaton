@@ -12,5 +12,6 @@ public class GroupResponse {
 
     private UUID id;
     private String name;
+    private UUID templateId;
     private List<String> deviceIds;
 }

@@ -23,6 +23,9 @@ public class Group {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "template_id")
+    private UUID templateId;
+
     @ManyToMany
     @JoinTable(
             name = "device_group",
