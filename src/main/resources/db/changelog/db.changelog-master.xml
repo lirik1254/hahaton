@@ -38,4 +38,12 @@
                  endDelimiter=";"/>
     </changeSet>
 
+    <changeSet id="0006-change-building-id-to-integer" author="kirill">
+        <sqlFile path="init/0006-change-building-id-to-integer.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
 </databaseChangeLog>

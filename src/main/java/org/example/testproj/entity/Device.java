@@ -24,7 +24,7 @@ public class Device {
     private String name;
 
     @Column(name = "building_id", nullable = false)
-    private UUID buildingId;
+    private Integer buildingId;
 
     @Column(name = "complex_id", nullable = false)
     private Integer complexId;

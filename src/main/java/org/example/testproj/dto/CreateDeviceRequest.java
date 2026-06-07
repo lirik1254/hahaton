@@ -12,7 +12,7 @@ public class CreateDeviceRequest {
     private String name;
 
     @NotNull
-    private UUID buildingId;
+    private Integer buildingId;
 
     @NotNull
     private Integer complexId;
