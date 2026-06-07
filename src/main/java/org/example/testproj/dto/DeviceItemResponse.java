@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DeviceItemResponse {
-    private String deviceId;
-    private String deviceName;
-    private String deviceTemplate;
+    private String id;
+    private String name;
 }
