@@ -37,6 +37,14 @@ public class TemplateController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<TemplateResponse> updateTemplate(@PathVariable UUID id,
+                                                           @Valid @RequestBody CreateTemplateRequest request) {
+        return templateService.updateTemplate(id, request)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteTemplate(@PathVariable UUID id) {
         if (!templateService.deleteTemplate(id)) {

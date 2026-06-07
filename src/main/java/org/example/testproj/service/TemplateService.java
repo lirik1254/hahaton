@@ -57,6 +57,29 @@ public class TemplateService {
         return templateRepository.findById(id).map(this::toResponse);
     }
 
+    @Transactional
+    public Optional<TemplateResponse> updateTemplate(UUID id, CreateTemplateRequest request) {
+        return templateRepository.findById(id).map(template -> {
+            List<Widget> widgets = request.getWidgets().stream()
+                    .map(dto -> {
+                        Widget widget = new Widget();
+                        widget.setName(dto.getName());
+                        widget.setX(dto.getX());
+                        widget.setY(dto.getY());
+                        widget.setWidth(dto.getWidth());
+                        widget.setHeight(dto.getHeight());
+                        return widgetRepository.save(widget);
+                    })
+                    .toList();
+
+            template.setName(request.getName());
+            template.setWidgets(widgets);
+            templateRepository.save(template);
+
+            return toResponse(template);
+        });
+    }
+
     public boolean deleteTemplate(UUID id) {
         if (!templateRepository.existsById(id)) {
             return false;
