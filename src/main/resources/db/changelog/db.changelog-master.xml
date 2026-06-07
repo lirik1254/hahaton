@@ -46,8 +46,16 @@
                  endDelimiter=";"/>
     </changeSet>
 
-    <changeSet id="0007-group-add-template-id" author="dima">
-        <sqlFile path="init/0007-group-add-template-id.sql"
+    <changeSet id="0007-create-static-info" author="dima">
+        <sqlFile path="init/0007-create-static-info.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
+    <changeSet id="0008-group-add-template-id" author="dima">
+        <sqlFile path="init/0008-group-add-template-id.sql"
                  relativeToChangelogFile="false"
                  splitStatements="true"
                  stripComments="true"
