@@ -8,6 +8,15 @@ Backend на Spring Boot 4 (Java 21) для умного жилого компл
 Затем
 
 ```bash
+docker build -t testproj:local .
+```                                                                                                                         
+и в .env: 
+```bash
+APP_IMAGE=testproj:local
+```
+
+
+```bash
 docker network create app
 docker-compose up -d
 ```
