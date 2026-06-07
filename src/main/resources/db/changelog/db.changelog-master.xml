@@ -54,4 +54,12 @@
                  endDelimiter=";"/>
     </changeSet>
 
+    <changeSet id="0008-group-add-template-id" author="dima">
+        <sqlFile path="init/0008-group-add-template-id.sql"
+                 relativeToChangelogFile="false"
+                 splitStatements="true"
+                 stripComments="true"
+                 endDelimiter=";"/>
+    </changeSet>
+
 </databaseChangeLog>

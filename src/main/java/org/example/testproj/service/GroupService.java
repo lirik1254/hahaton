@@ -30,12 +30,14 @@ public class GroupService {
 
         Group group = new Group();
         group.setName(request.getName());
+        group.setTemplateId(request.getTemplateId());
         group.setDevices(devices);
         groupRepository.save(group);
 
         return GroupResponse.builder()
                 .id(group.getId())
                 .name(group.getName())
+                .templateId(group.getTemplateId())
                 .deviceIds(devices.stream().map(d -> d.getId().toString()).toList())
                 .build();
     }
@@ -45,6 +47,7 @@ public class GroupService {
                 .map(g -> GroupResponse.builder()
                         .id(g.getId())
                         .name(g.getName())
+                        .templateId(g.getTemplateId())
                         .deviceIds(g.getDevices().stream().map(d -> d.getId().toString()).toList())
                         .build())
                 .toList();

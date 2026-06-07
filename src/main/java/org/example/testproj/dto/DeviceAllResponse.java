@@ -9,4 +9,5 @@ public class DeviceAllResponse {
     private String complexName;
     private String buildingName;
     private String deviceName;
+    private String templateName;
 }

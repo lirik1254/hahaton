@@ -8,7 +8,10 @@ import org.example.testproj.dto.DeviceAllResponse;
 import org.example.testproj.dto.DeviceResponse;
 import org.example.testproj.dto.ujin.UjinBuildingsListResponse;
 import org.example.testproj.entity.Device;
+import org.example.testproj.entity.Group;
+import org.example.testproj.entity.Template;
 import org.example.testproj.repository.DeviceRepository;
+import org.example.testproj.repository.TemplateRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,6 +21,7 @@ import java.util.*;
 public class DeviceService {
 
     private final DeviceRepository deviceRepository;
+    private final TemplateRepository templateRepository;
     private final UjinClient ujinClient;
     private final UjinProperties ujinProperties;
 
@@ -44,10 +48,22 @@ public class DeviceService {
                 page = page + 1;
                 buildingsList = ujinClient.getBuildingsList(pageSize, page, device.getComplexId(), null);
             }
-            retMap.get(device.getId().toString()).setDeviceName(device.getName());
+            DeviceAllResponse stored = retMap.get(device.getId().toString());
+            stored.setDeviceName(device.getName());
+            stored.setTemplateName(resolveTemplateName(device));
         }
 
         return retMap;
+    }
+
+    private String resolveTemplateName(Device device) {
+        return device.getGroups().stream()
+                .map(Group::getTemplateId)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .flatMap(templateRepository::findById)
+                .map(Template::getName)
+                .orElse(null);
     }
 
     public DeviceResponse createDevice(CreateDeviceRequest request) {
