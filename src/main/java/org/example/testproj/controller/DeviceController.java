@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/devices")
@@ -53,6 +54,24 @@ public class DeviceController {
     @GetMapping
     public ResponseEntity<List<DeviceItemResponse>> getDevices() {
         return ResponseEntity.ok(deviceService.getDevices());
+    }
+
+    @Operation(summary = "Список устройств по ЖК", description = "Возвращает устройства, привязанные к указанному complexId")
+    @GetMapping("/by-complex/{complexId}")
+    public ResponseEntity<List<DeviceItemResponse>> getDevicesByComplex(@PathVariable Integer complexId) {
+        return ResponseEntity.ok(deviceService.getDevicesByComplexId(complexId));
+    }
+
+    @Operation(summary = "Список устройств по строению", description = "Возвращает устройства, привязанные к указанному buildingId")
+    @GetMapping("/by-building/{buildingId}")
+    public ResponseEntity<List<DeviceItemResponse>> getDevicesByBuilding(@PathVariable Integer buildingId) {
+        return ResponseEntity.ok(deviceService.getDevicesByBuildingId(buildingId));
+    }
+
+    @Operation(summary = "Список устройств по шаблону", description = "Возвращает устройства, чья группа привязана к указанному templateId")
+    @GetMapping("/by-template/{templateId}")
+    public ResponseEntity<List<DeviceItemResponse>> getDevicesByTemplate(@PathVariable UUID templateId) {
+        return ResponseEntity.ok(deviceService.getDevicesByTemplateId(templateId));
     }
 
     @PostMapping

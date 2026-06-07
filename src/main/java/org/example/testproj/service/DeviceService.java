@@ -9,6 +9,7 @@ import org.example.testproj.repository.DeviceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,23 @@ public class DeviceService {
     private final DeviceRepository deviceRepository;
 
     public List<DeviceItemResponse> getDevices() {
-        return deviceRepository.findAll().stream()
+        return toItems(deviceRepository.findAll());
+    }
+
+    public List<DeviceItemResponse> getDevicesByComplexId(Integer complexId) {
+        return toItems(deviceRepository.findAllByComplexId(complexId));
+    }
+
+    public List<DeviceItemResponse> getDevicesByBuildingId(Integer buildingId) {
+        return toItems(deviceRepository.findAllByBuildingId(buildingId));
+    }
+
+    public List<DeviceItemResponse> getDevicesByTemplateId(UUID templateId) {
+        return toItems(deviceRepository.findAllByTemplateId(templateId));
+    }
+
+    private List<DeviceItemResponse> toItems(List<Device> devices) {
+        return devices.stream()
                 .map(device -> {
                     DeviceItemResponse item = new DeviceItemResponse();
                     item.setId(device.getId().toString());
