@@ -41,17 +41,20 @@ public class DeviceController {
                                       "id1": {
                                         "complexName": "ЖК1",
                                         "buildingName": "Здание 1",
-                                        "deviceName": "Настенный телевизор1-1"
+                                        "deviceName": "Настенный телевизор1-1",
+                                        "templateName": "Шаблон 1"
                                       },
                                       "id2": {
                                         "complexName": "ЖК1",
                                         "buildingName": "Здание 2",
-                                        "deviceName": "Настенный телевизор1-2"
+                                        "deviceName": "Настенный телевизор1-2",
+                                        "templateName": "Шаблон 1"
                                       },
                                       "id3": {
                                         "complexName": "ЖК2",
                                         "buildingName": "Здание 1",
-                                        "deviceName": "Настенный телевизор2-1"
+                                        "deviceName": "Настенный телевизор2-1",
+                                        "templateName": "Шаблон 2"
                                       }
                                     }"""
                     )
