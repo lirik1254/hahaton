@@ -20,6 +20,7 @@ server:
 ujin:
   base-url: https://hck-api.unicorn.icu
   token: ${UJIN_TOKEN}
+  page-size: 1000
 
 jwt:
   secret: ${JWT_SECRET}
